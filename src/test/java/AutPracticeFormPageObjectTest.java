@@ -6,55 +6,72 @@ import pages.RegistrationPage;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
-import static pages.RegistrationPage.firstNameInput;
 
 
-public class AutPracticeFormPageObject {
+public class AutPracticeFormPageObjectTest {
+
+    RegistrationPage registrationPage = new RegistrationPage();
     @BeforeAll
     static void beforeAll() {
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
-        Configuration.holdBrowserOpen = true;
+        Configuration.holdBrowserOpen = false;
     }
 
     @Test
-    public void autPracticeForm() {
-        open("/automation-practice-form");
-        executeJavaScript("$('#fixedban').remove()");
-        executeJavaScript("$('footer').remove()");
+    public void successfulRegistration() {
+        registrationPage.openPage()
+            .setFirstName("Andrei")
+            .setLastName("Drzdvsk")
+            .setUserEmail("andr@gmail.com")
+            .setGenderWrapper("Other")
+            .setUserNumber("2911111111 ")
+            .setDateOfBirth("02", "September", "1998")
+            .selectFavSubject("eng")
+            .setHobbiesWrapper("Music")
+            .uploadPicture()
+            .setCurrentAddress("Some Address")
+            .stateDropdownClick()
+            .setStateCityWrapper("NCR")
+            .setCity()
+            .setStateCityWrapper("Delhi")
+            .submitButton()
 
+            .checkResult("Student Name", "Andrei Drzdvsk")
+            .checkResult("Student Email", "andr@gmail.com")
+            .checkResult("Gender", "Other")
+            .checkResult("Mobile", "2911111111")
+            .checkResult("Date of Birth", "02 September,1998")
+            .checkResult("Subjects", "English")
+            .checkResult("Hobbies", "Music")
+            .checkResult("Picture", "pic1.png")
+            .checkResult("Address", "Some Address")
+            .checkResult("State and City", "NCR Delhi");
+    }
+    @Test
+    public void successfulRegWithMinimalData() {
+        registrationPage.openPage()
+                .setFirstName("And-r")
+                .setLastName("Drzdv_sk")
+                .setGenderWrapper("Male")
+                .setUserNumber("4499999999")
+                .setDateOfBirth("02", "September", "1998")
+                .submitButton()
 
-        new RegistrationPage().setFirstName("Andrei");
+                .checkResult("Student Name", "And-r Drzdv_sk")
+                .checkResult("Gender", "Male")
+                .checkResult("Mobile", "4499999999")
+                .checkResult("Date of Birth", "02 September,1998");
 
-        $("#lastName").setValue("Drzdvsk");
-        $("#userEmail").setValue("andr@gmail.com");
-        $("#genterWrapper").$(byText("Other")).click();
-        $("#userNumber").setValue("2911111111");
-        $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption(8);
-        $(".react-datepicker__year-select").selectOptionByValue("1998");
-        $(".react-datepicker__day--002").click();
-        $("#subjectsInput").setValue("eng").pressEnter();
-        $("#hobbiesWrapper").$(byText("Music")).click();
-        $("#uploadPicture").uploadFromClasspath("pic1.png");
-        $("#currentAddress").setValue("Some Address");
-        $("#state").click();
-        $("#stateCity-wrapper").$(byText("NCR")).click();
-        $("#city").click();
-        $("#stateCity-wrapper").$(byText("Delhi")).click();
-        $("#submit").click();
-
-        $(".modal-content")
-                .shouldHave(text("Thanks for submitting the form"))
-                .shouldHave(text("Andrei Drzdvsk"))
-                .shouldHave(text("2911111111"))
-                .shouldHave(text("02 September,1998"))
-                .shouldHave(text("English"))
-                .shouldHave(text("Music"))
-                .shouldHave(text("pic1.png"))
-                .shouldHave(text("Some Address"))
-                .shouldHave(text("NCR Delhi"))
-                .shouldHave(text("Other"));
+    }
+    @Test
+    public void clickSubmitWithoutData() {
+        registrationPage.openPage()
+                .submitButton()
+                .nCheckBorderColorFirstName()
+                .nCheckBorderColorLastName()
+                .nCheckBorderColorPhoneNumber()
+                .nCheckTableRespIsNotVisible();
     }
 }
