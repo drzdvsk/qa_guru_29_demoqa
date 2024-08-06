@@ -10,7 +10,7 @@ import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public class RegistrationPage {
-    private SelenideElement
+    private final SelenideElement
             firstNameInput = $("#firstName"),
             lastNameInput = $("#lastName"),
             userEmailInput = $("#userEmail"),
@@ -28,7 +28,6 @@ public class RegistrationPage {
 
 
     CalendarComponent calendarComponent = new CalendarComponent();
-    TableResComponent tableResComponent = new TableResComponent();
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");

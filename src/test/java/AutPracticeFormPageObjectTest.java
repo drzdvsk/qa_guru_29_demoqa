@@ -20,7 +20,7 @@ public class AutPracticeFormPageObjectTest {
     }
 
     @Test
-    public void successfulRegistration() {
+    public void successfulRegistrationTest() {
         registrationPage.openPage()
             .setFirstName("Andrei")
             .setLastName("Drzdvsk")
@@ -50,7 +50,7 @@ public class AutPracticeFormPageObjectTest {
             .checkResult("State and City", "NCR Delhi");
     }
     @Test
-    public void successfulRegWithMinimalData() {
+    public void successfulRegWithMinimalDataTest() {
         registrationPage.openPage()
                 .setFirstName("And-r")
                 .setLastName("Drzdv_sk")
@@ -66,7 +66,7 @@ public class AutPracticeFormPageObjectTest {
 
     }
     @Test
-    public void clickSubmitWithoutData() {
+    public void clickSubmitWithoutDataTest() {
         registrationPage.openPage()
                 .submitButton()
                 .nCheckBorderColorFirstName()
