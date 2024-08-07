@@ -27,7 +27,11 @@ public class RegistrationPage {
             submitButton = $("#submit");
 
 
+
+
+
     CalendarComponent calendarComponent = new CalendarComponent();
+    TableResComponent tableResComponent = new TableResComponent();
 
     public RegistrationPage openPage() {
         open("/automation-practice-form");
@@ -124,8 +128,8 @@ public class RegistrationPage {
     }
 
     public RegistrationPage checkResult(String key, String value) {
-        $(".table-responsive").$(byText(key)).parent()
-                .shouldHave(text(value));
+        tableResComponent.checkResult(key, value);
+
         return this;
     }
 
@@ -144,10 +148,9 @@ public class RegistrationPage {
 
         return this;
     }
-    public RegistrationPage nCheckTableRespIsNotVisible() {
-        $(".table-responsive").shouldNotBe(visible);
+    public void nCheckTableRespIsNotVisible() {
+        tableResComponent.nCheckResult();
 
-        return this;
     }
 }
 
