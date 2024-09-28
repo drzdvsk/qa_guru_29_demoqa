@@ -4,6 +4,7 @@ import com.codeborne.selenide.Configuration;
 import helpers.Attach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.codeborne.selenide.Condition.text;
@@ -29,6 +30,7 @@ public class AutPracticeForm {
     }
 
     @Test
+    @Tag("demoqa")
     public void autPracticeForm() {
         open("/automation-practice-form");
         executeJavaScript("$('#fixedban').remove()");
