@@ -27,7 +27,7 @@ public class AutPracticeForm {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         Configuration.holdBrowserOpen = false;
-        Configuration.headless = true;
+        Configuration.headless = false;
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
