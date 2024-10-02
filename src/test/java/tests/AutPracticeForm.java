@@ -67,7 +67,9 @@ public class AutPracticeForm {
         $("#hobbiesWrapper").$(byText("Music")).click();
         $("#uploadPicture").uploadFromClasspath("pic1.png");
         $("#currentAddress").setValue("Some Address");
-        $("#state").click();
+        $("#state")
+                .scrollTo()
+                .click();
         $("#stateCity-wrapper").$(byText("NCR")).click();
         $("#city").click();
         $("#stateCity-wrapper").$(byText("Delhi")).click();
