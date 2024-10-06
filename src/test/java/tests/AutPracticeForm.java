@@ -22,13 +22,16 @@ public class AutPracticeForm {
     @BeforeAll
     static void beforeAll() {
 
+        String browser = System.getProperty("browser", "chrome");
+        Configuration.browser = browser;
+        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
 
         Configuration.browserSize = "1920x1080";
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
         Configuration.holdBrowserOpen = false;
         Configuration.headless = false;
-        Configuration.remote = "https://user1:1234@selenoid.autotests.cloud/wd/hub";
+
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("selenoid:options", Map.<String, Object>of(
